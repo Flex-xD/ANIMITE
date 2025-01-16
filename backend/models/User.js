@@ -1,33 +1,55 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose, { mongo } from "mongoose";
+import bcrypt from "bcrypt";
 
-const userSchema = new Mongoose.Schema({
-    email : {
-        type:String , 
-        required:[ , "Email is required !"] ,
-        unique:true
-    } , 
-    userName : {
-        lowercase : true ,
-        required:true , 
-        unique:true
-    } , 
-    password : {
-        type:String ,
-        required:true , 
-        unique:true ,
-    } , 
-    favouriteAnimes : [String] ,
-    TopFavouriteAnimes:{
-        type:[String] ,
-        validate : function (value) {
-            return value.lenght <= 5
-        } ,
-        message:"You can only have upto 5 favourite animes !"
-    } , 
-    favouriteAnimeCharacter : {
-        default:false ,
-        reason: () => {
-            
+const userSchema = mongoose.Schema({
+    email: {
+        type: String,
+        required: [true, "Email is required !"],
+        unique: true,
+        trim: true
+    },
+    userName: {
+        type: String,
+        lowercase: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: [true, "Password is required !"],
+        trim: true
+    },
+    profileImage: {
+        type: String,
+        default: ""
+    },
+    friends: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User" ,
+    }],
+    favouriteAnimes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Anime" ,
+    }],
+    favouriteAnimeCharacter: [{
+        value: { type: Boolean, default: false },
+    }],
+    blogs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Blog"
+    }]
+})
+
+userSchema.pre("save", async (next) => {
+    try {
+        if (this.isModified("password")) {
+            const genSalt = await bcrypt.genSalt(10);
+            this.password =  bcrypt.hashSync(this.password, genSalt);
         }
+        next();
+    } catch (error) {
+        next(error);
     }
 })
+
+const User = mongoose.model("User", userSchema);
+export default User;
