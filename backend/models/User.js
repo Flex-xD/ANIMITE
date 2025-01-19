@@ -39,11 +39,11 @@ const userSchema = mongoose.Schema({
     }]
 })
 
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next)  {
     try {
         if (this.isModified("password")) {
             const genSalt = await bcrypt.genSalt(10);
-            this.password =  bcrypt.hashSync(this.password, genSalt);
+            this.password =  await bcrypt.hash(this.password, genSalt);
         }
         next();
     } catch (error) {
