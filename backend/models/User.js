@@ -27,8 +27,7 @@ const userSchema = mongoose.Schema({
         ref: "User" ,
     }],
     favouriteAnimes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Anime" ,
+        type:String ,
     }],
     favouriteAnimeCharacter: [{
         value: { type: Boolean, default: false },
