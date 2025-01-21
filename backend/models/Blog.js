@@ -23,11 +23,11 @@ const blogSchema = new mongoose.Schema({
         default:0
     } , 
     comment : [{
-        author:{type:mongoose.Schema.ObjectId.Types , ref:"User"} ,
+        author:{type:mongoose.Schema.Types.ObjectId , ref:"User"} ,
         content:{type:String , required:true} ,
         date:{type:Date  , default:Date.now}
     }]
-});
+} , {timestamps:true});
 
 const Blog = mongoose.model("Blog" , blogSchema);
 export default Blog;
