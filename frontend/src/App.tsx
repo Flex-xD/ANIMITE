@@ -1,23 +1,13 @@
-import { useState  , useEffect} from "react"
-import apiClient from "./middlewares/axios";
+import { Button } from "./components/ui/button"
 
 function App() {
-  const [data , setData] = useState([]);
-  useEffect(() => {
-    const jinkanApiData = async () => {
-      const res = await apiClient.get("https://api.jikan.moe/v4/anime?q=naruto");
-      console.log(res.data);
-      setData(res.data);
-    }
-    jinkanApiData();
-    
-  } , [data])
   return (
-    <div>
-      <h1>
-      {data ? JSON.stringify(data) : "Loading...."}
-      </h1>
-    </div>
+    <>
+      <div className="flex justify-center items-center h-100vh w-100vw bg-black ">
+        <h1 className="text-green-100">HELLO THERE !</h1>
+        <Button>Click To Submit !</Button>
+      </div>
+    </>
   )
 }
 
