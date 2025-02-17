@@ -41,3 +41,31 @@ export const registerController = async (req:Request , res:Response) => {
     console.log("User Registered !");
     return res.status(201).json({msg:"User Registered !" , user})
 }
+
+export const loginController = async (req:Request , res:Response) => {
+    try {
+        const {email , password , username} = req.body as registerControllerType;
+        if ((!email && !username) || !password) {
+            return res.status(400).json({msg:"Please fill in all the fields!"})
+        }
+        const user = await User.findOne({$or:[{email} , {username}]});
+        if (!user) {
+            return res.status(400).json({msg:"User does not exist !"});
+        }
+        const match = await bcrypt.compare(password , user.password);
+        if (!match) {
+            return res.status(400).json({msg:"Invalid credentials !"});
+        }
+        const token = await createtoken(user._id as string , user.email);
+        res.cookie("token" , token , {
+            httpOnly:true ,
+            maxAge:maxage , 
+            sameSite:"strict" ,
+            secure:true
+        });
+        return res.status(200).json({msg:"User Logged In !" , user});
+    } catch (error) {
+        console.log({error});
+        return res.status(500).json({msg:"Internal Server Error !"});
+    }
+}
