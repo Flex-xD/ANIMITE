@@ -36,7 +36,7 @@ export const registerController = async (req:Request , res:Response) => {
         httpOnly:true , 
         maxAge:maxage ,
         sameSite:"strict" ,
-        secure:true
+        secure:false
     })
     console.log("User Registered !");
     return res.status(201).json({msg:"User Registered !" , user})
@@ -45,7 +45,7 @@ export const registerController = async (req:Request , res:Response) => {
 export const loginController = async (req:Request , res:Response) => {
     try {
         const {email , password , username} = req.body as registerControllerType;
-        if ((!email && !username) || !password) {
+        if (!email && !username || !password) {
             return res.status(400).json({msg:"Please fill in all the fields!"})
         }
         const user = await User.findOne({$or:[{email} , {username}]});
@@ -61,9 +61,19 @@ export const loginController = async (req:Request , res:Response) => {
             httpOnly:true ,
             maxAge:maxage , 
             sameSite:"strict" ,
-            secure:true
+            secure:false
         });
         return res.status(200).json({msg:"User Logged In !" , user});
+    } catch (error) {
+        console.log({error});
+        return res.status(500).json({msg:"Internal Server Error !"});
+    }
+}
+
+export const logoutController = async (req:Request , res:Response) => {
+    try {
+        res.clearCookie("token" , { httpOnly: true, secure: false, sameSite: "strict" });
+        return res.status(200).json({msg:"User Logged Out !"});
     } catch (error) {
         console.log({error});
         return res.status(500).json({msg:"Internal Server Error !"});
