@@ -1,13 +1,17 @@
-import { Button } from "./components/ui/button"
+import { BrowserRouter , Routes , Route } from 'react-router-dom';
+import Auth from './pages/Auth/Auth';
+import Profile from './pages/Profile/Profile';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <>
-      <div className="flex justify-center items-center h-100vh w-100vw bg-black ">
-        <h1 className="text-green-100">HELLO THERE !</h1>
-        <Button>Click To Submit !</Button>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>        
+        <Route path="/profile" element={<Profile/>}/>        
+        <Route path="*" element={<Auth/>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

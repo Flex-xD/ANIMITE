@@ -1,0 +1,59 @@
+Primary Colors (Main Theme)
+Electric Blue (#1E90FF) – Vibrant and modern, great for buttons and highlights.
+Neon Green (#00FF7F) – Adds contrast, works well for active states and success messages.
+
+Secondary Colors (Supportive Accents)
+Deep Purple (#6A0DAD) – Brings a mysterious and elegant touch.
+Cyan (#00FFFF) – Complements blue and green, giving a cyberpunk feel.
+Background Colors (Dark Mode Aesthetic)
+Charcoal Black (#121212) – Sleek and modern dark background.
+Gunmetal Gray (#232B2B) – Slightly lighter shade for containers/cards.
+Dark Navy Blue (#0A192F) – Great for secondary backgrounds.
+
+Text & UI Colors
+Off-White (#EAEAEA) – Ensures readability on dark backgrounds.
+Light Gray (#A0A0A0) – Subtle for secondary text and placeholders.
+Bright Red (#FF4D4D) – For error messages and warnings.
+
+Gradient Ideas (For Buttons & Highlights)
+Blue to Cyan: linear-gradient(90deg, #1E90FF, #00FFFF)
+Green to Blue: linear-gradient(90deg, #00FF7F, #1E90FF)
+Purple to Neon Green: linear-gradient(90deg, #6A0DAD, #00FF7F)
+
+
+Primary Font (Headings & Titles)
+📌 Font: Poppins
+🔹 Why? Modern, clean, and versatile with excellent readability.
+🔹 Usage:
+H1: 48px, Extra Bold (800)
+H2: 36px, Bold (700)
+H3: 28px, Semi-Bold (600)
+Secondary Font (Subheadings & UI Elements)
+
+
+📌 Font: Inter
+🔹 Why? Sleek and optimized for digital interfaces.
+🔹 Usage:
+H4: 24px, Medium (500)
+H5: 20px, Regular (400)
+H6: 18px, Regular (400)
+Body Text & Paragraphs
+
+
+📌 Font: Nunito or Roboto
+🔹 Why? Friendly and easy to read for longer text.
+🔹 Usage:
+Paragraphs: 16px, Regular (400)
+Small Text (Captions, UI labels): 14px, Light (300)
+
+Special Font for Logo / Anime Vibes
+📌 Font: Orbitron or Zen Tokyo Zoo
+🔹 Why? Sci-fi, futuristic, and anime-stylized.
+🔹 Usage:
+
+For the "Animite" Logo or Important UI Accents
+Typography Pairing Summary:
+Headings (H1-H3) → Poppins (800/700/600)
+Subheadings & UI Elements (H4-H6) → Inter (500/400/400)
+Body Text & Descriptions → Nunito or Roboto (400)
+Special Accents / Logo → Orbitron or Zen Tokyo Zoo
