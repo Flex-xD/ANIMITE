@@ -6,10 +6,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/ta
 import { Input } from "../../components/ui/input";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "../../store";
 import { AxiosError } from "axios";
 
 function Auth() {
     const navigate = useNavigate();
+    const {setUserInfo} = useAppStore();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
@@ -42,6 +44,8 @@ function Auth() {
             const payload = isSignup ? { email, username, password } : { email, password };
 
             const response = await apiClient.post(endpoint, payload);
+            setUserInfo(response.data);
+            console.log({response});
             console.log(response);
             navigate("/profile");
             toast.success(`${isSignup ? "Signup" : "Login"} successful !`);
