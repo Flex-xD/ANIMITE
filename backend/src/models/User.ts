@@ -1,4 +1,4 @@
-import mongoose  , {Document , Model , Schema} from "mongoose";
+import mongoose  , {Document , Model} from "mongoose";
 import bcrypt from "bcryptjs";
 
 interface IUser extends Document {
@@ -10,6 +10,8 @@ interface IUser extends Document {
     role:"user" | "admin" ,
     friends:mongoose.Types.ObjectId[] ,
     favouriteAnimes?:mongoose.Types.ObjectId[] ,
+    blogs?:mongoose.Types.ObjectId[] ,
+    community?:mongoose.Types.ObjectId[] ,
     badges:mongoose.Types.ObjectId[] ,
     notifications:string[], 
     watchList:mongoose.Types.ObjectId[]
@@ -53,6 +55,10 @@ const userSchema = new mongoose.Schema<IUser>({
         ref:"Anime" , 
         type:mongoose.Schema.Types.ObjectId
     }] , 
+    blogs:[{
+        ref:"Blog" ,
+        type:mongoose.Schema.Types.ObjectId
+    }] ,
     badges:[{
         ref:"Badge" , 
         type:mongoose.Schema.Types.ObjectId

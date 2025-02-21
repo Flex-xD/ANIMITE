@@ -68,7 +68,7 @@ function Auth() {
 
             <div className="h-[100vh] w-[50vw] flex flex-col justify-center items-center bg-gradient-to-r from-blue-200 via-green-200 to-cyan-200 bg-animated-gradient">
                 <div className="h-[20vh] w-[90%] flex flex-col items-center justify-center">
-                    <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-600 font-[Poppins]">REGISTER AND BECOME ONE 
+                    <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-600 font-[Raleway]">REGISTER AND BECOME ONE 
                         OF US !</h1>
                         <p className="text-center text-balance font-medium text-gray-700 text-sm">
                             Join our community and explore the world of anime with us. Sign up today and start your journey!
@@ -133,7 +133,7 @@ function Auth() {
             </div>
 
             <div className="h-[100vh] w-[50vw] flex flex-col justify-center items-center">
-                <div className="h-full w-full border-2 border-black flex flex-col items-center justify-center bg-gradient-to-r from-red-200 via-green-100 to-purple-200 bg-animated-gradient">
+                <div className="h-full w-full border-2 border-black flex flex-col items-center justify-center bg-gradient-to-r from-purple-200 via-pink-100 to-teal-200 bg-animated-gradient">
                     <div className="h-[27vh] w-[23vw] flex flex-col items-center justify-center border border-black bg-white">
                         LOGO
                     </div>

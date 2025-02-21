@@ -28,8 +28,9 @@ export const registerController = async (req:Request , res:Response) => {
         password , 
         role:"user" , 
         friends:[] ,
-        badges:[] , 
-        profilePicture:""
+        badges:[] ,
+        profilePicture:"" , 
+        blogs:[] ,
     });
     const token = await createtoken(user._id as string, user.email);
     res.cookie("token" , token , {

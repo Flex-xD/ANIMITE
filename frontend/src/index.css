@@ -57,6 +57,7 @@
   }
 }
 
+
 @layer base {
   * {
     @apply border-border;
@@ -78,3 +79,5 @@
     animation: gradientAnimation 6s ease infinite;
   }
 }
+
+
