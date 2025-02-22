@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User, { IUser } from "../models/User.js";
 import Blog, { Iblog } from "../models/Blog.js";
+import { ADDRGETNETWORKPARAMS } from "dns";
 
 interface AuthRequest extends Request {
     userId?: string
@@ -20,7 +21,8 @@ export const postBlogController = async (req: AuthRequest, res: Response) => {
             title,
             description,
             images,
-            body
+            body , 
+            author:req.userId
         });
         if (!user.blogs) {
             user.blogs = []
@@ -50,9 +52,33 @@ export const getBlogController = async (req: AuthRequest, res: Response) => {
                 }
             );
         }
-        return res.status(200).json({ msg:"Blogs retrived successfully !" , blogs: user.blogs });
+        return res.status(200).json({ msg: "Blogs retrived successfully !", blogs: user.blogs });
     } catch (error) {
         console.log({ error });
         return res.status(500).json({ msg: "Internal Server error !" })
+    }
+}
+
+
+export const deleteBlogController = async (req: AuthRequest, res: Response) => {
+    try {
+        const { blogId } = req.params;
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(400).json({msg:"Blog not found !"});
+        }
+
+        if(blog.author.toString() !== req.userId) {
+            return res.status(403).json({msg:"You can only delete your own blog !"});
+        }
+
+        await User.findByIdAndUpdate(req.userId , {$pull:{blogs:blogId}});
+        await blog.deleteOne();
+
+        return res.status(200).json({msg:"Blog deleted Successfully !"});
+
+
+    } catch (error) {
+
     }
 }

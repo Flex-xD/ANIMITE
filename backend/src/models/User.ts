@@ -27,13 +27,13 @@ const userSchema = new mongoose.Schema<IUser>({
         type:String ,
         required:true , 
         unique:true , 
-        minlength:5 ,
-        maxlength:12
+        minlength:[3 , "Username should be of atleast 3 characters ! "] ,
+        maxlength:[14 , "Username should not exceed 14 characters !"]
     } ,
     password:{
         type:String ,
         required:true ,
-        minlength:4
+        minlength:[6 , "Password length should be more than 6"]
     } , 
     profilePicture:{
         type:String , 

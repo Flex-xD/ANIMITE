@@ -7,7 +7,8 @@ export interface Iblog {
     images?: string,
     likes: number | mongoose.Types.ObjectId[],
     comment: mongoose.Types.ObjectId[],
-    _id:mongoose.Types.ObjectId
+    _id: mongoose.Types.ObjectId , 
+    author:mongoose.Types.ObjectId
 }
 
 const blogSchema = new mongoose.Schema<Iblog>({
@@ -49,7 +50,12 @@ const blogSchema = new mongoose.Schema<Iblog>({
     comment: [{
         ref: "Comment",
         type: mongoose.Schema.Types.ObjectId
-    }]
+    }] , 
+    author:{
+        ref:"User" , 
+        type:mongoose.Schema.Types.ObjectId , 
+        required:true
+    }
 }, {
     timestamps: true
 })
