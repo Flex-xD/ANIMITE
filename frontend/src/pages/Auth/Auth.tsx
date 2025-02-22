@@ -16,6 +16,8 @@ function Auth() {
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
 
+    console.log("This is a Authenticaion page !")
+
     const validateAuth = (isSignup: boolean = false) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.length) {

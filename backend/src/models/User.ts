@@ -1,7 +1,7 @@
 import mongoose  , {Document , Model} from "mongoose";
 import bcrypt from "bcryptjs";
 
-interface IUser extends Document {
+export interface IUser extends Document {
     email:string , 
     username:string , 
     password:string , 
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema<IUser>({
     password:{
         type:String ,
         required:true ,
-        minlength:8
+        minlength:4
     } , 
     profilePicture:{
         type:String , 
@@ -57,7 +57,8 @@ const userSchema = new mongoose.Schema<IUser>({
     }] , 
     blogs:[{
         ref:"Blog" ,
-        type:mongoose.Schema.Types.ObjectId
+        type:mongoose.Schema.Types.ObjectId ,
+        default:[]
     }] ,
     badges:[{
         ref:"Badge" , 
