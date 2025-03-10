@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/create-blog", verifyToken , postBlogController);
 router.get("/get-all-blogs" , verifyToken , getBlogController);
-router.post("/delete-blog/:id" , verifyToken , deleteBlogController);
+router.post("/delete-blog/:blogId" , verifyToken , deleteBlogController);
 
 export default router;

@@ -47,6 +47,9 @@ export const postBlogController = async (req: AuthRequest, res: Response) => {
     }
 }
 
+
+// ! Add the query Logic 
+
 export const getBlogController = async (req: AuthRequest, res: Response) => {
     try {
         const { limit = 10, page = 1 } = req.query;
