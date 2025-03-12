@@ -11,7 +11,7 @@ import { AxiosError } from "axios";
 
 function Auth() {
     const navigate = useNavigate();
-    const { setUserInfo , setIsAuthenticated , isAuthenticated} = useAppStore();
+    const { setUserInfo , setIsAuthenticated } = useAppStore();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
@@ -42,11 +42,13 @@ function Auth() {
         try {
             const endpoint = isSignup ? REGISTER_ROUTES : LOGIN_ROUTES;
             const payload = isSignup ? { email, username, password } : { email, password };
-
             const response = await apiClient.post(endpoint, payload);
             setUserInfo(response.data.user);
+            setIsAuthenticated(true);
             console.log({ response });
-            navigate("/profile");
+            setTimeout(() => {
+                navigate("/profile");
+            }, 100); 
             toast.success(`${isSignup ? "Signup" : "Login"} successful!`);
         } catch (error) {
             if (error instanceof AxiosError) {
