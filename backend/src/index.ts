@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import authRoutes from "./routes/authRoutes.js"
+import communityRoutes from "./routes/communityRoutes.js"
 import blogRoutes from "./routes/blogRoutes.js"
 import {connectDB} from "./config/db.js";
 dotenv.config();
@@ -20,9 +21,11 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/api/auth"  , authRoutes);
-app.use("/api/blog" , blogRoutes)
+app.use("/api/blog" , blogRoutes);
+app.use("/api/community" , communityRoutes)
+
 
 app.listen(port , () => {
     console.log(`Server running on PORT : ${port}`);
     connectDB();
-})
+});

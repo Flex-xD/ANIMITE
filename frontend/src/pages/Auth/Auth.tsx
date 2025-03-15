@@ -46,6 +46,7 @@ const Auth = () => {
             const endpoint = isSignup ? REGISTER_ROUTES : LOGIN_ROUTES;
             const payload = isSignup ? { email, username, password } : { email, password };
             const response = await apiClient.post(endpoint, payload);
+            toast.success("It is working here no problems");
             setUserInfo(response.data.user);
             setIsAuthenticated(true);
             console.log({ response });
@@ -66,7 +67,6 @@ const Auth = () => {
     const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (
         e: React.ChangeEvent<HTMLInputElement>
     ) => setter(e.target.value);
-    // Theme Colors from ProfilePage
     const colors = {
         bgDark: "bg-[#150028]",
         bgGradient: "bg-gradient-to-br from-[#0d001a] via-[#1a0033] to-[#2a004d]",
@@ -191,6 +191,7 @@ const Auth = () => {
                             <Input
                                 className={`${colors.bgDark}/70 ${colors.borderNeon} ${colors.textNeon} placeholder:text-[#d4bfff]/50 focus:border-[#6b00ff] focus:ring-2 focus:ring-[#6b00ff]/50 rounded-md transition-all duration-300 hover:bg-[#21003d]/80`}
                                 placeholder="Email"
+                                name="email"
                                 type="email"
                                 value={email}
                                 onChange={handleChange(setEmail)}
@@ -204,6 +205,7 @@ const Auth = () => {
                             <Input
                                 className={`${colors.bgDark}/70 ${colors.borderNeon} ${colors.textNeon} placeholder:text-[#d4bfff]/50 focus:border-[#6b00ff] focus:ring-2 focus:ring-[#6b00ff]/50 rounded-md transition-all duration-300 hover:bg-[#21003d]/80`}
                                 placeholder="Password"
+                                name="password"
                                 type="password"
                                 value={password}
                                 onChange={handleChange(setPassword)}
@@ -240,9 +242,9 @@ const Auth = () => {
             {/* Tailwind Animation Styles */}
             <style>{`
         .neon-text {
-          text-shadow: 0 0 5px rgba(107, 0, 255, 0.8), 0 0 10px rgba(255, 0, 204, 0.6);
+        text-shadow: 0 0 5px rgba(107, 0, 255, 0.8), 0 0 10px rgba(255, 0, 204, 0.6);
         }
-      `}</style>
+        `}</style>
         </motion.div>
     );
 };

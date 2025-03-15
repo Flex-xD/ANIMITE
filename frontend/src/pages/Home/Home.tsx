@@ -1,5 +1,3 @@
-import React from "react";
-
 const Home = () => {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_center,#1A1A2E,#000000)] font-sans antialiased text-white overflow-hidden">
