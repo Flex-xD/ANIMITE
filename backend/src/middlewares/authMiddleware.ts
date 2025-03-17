@@ -1,11 +1,12 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-interface AuthRequest extends Request {
+
+export interface IAuthRequest extends Request {
     userId?: string | null;
 }
 
-export const verifyToken = (req:AuthRequest , res:Response , next:NextFunction) => {
+export const verifyToken = (req:IAuthRequest , res:Response , next:NextFunction) => {
     try {
         const token = req.cookies.token;
         if (!token) {

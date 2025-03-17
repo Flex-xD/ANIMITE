@@ -1,28 +1,40 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
+import { string } from "zod";
 
-interface ICommunity {
-    admin:mongoose.Types.ObjectId
-    users:mongoose.Types.ObjectId[]
-    communityBlog:mongoose.Types.ObjectId[]
+export interface ICommunity extends Document {
+    name:string
+    description:string
+    admin:string
+    members:mongoose.Types.ObjectId[]
+    communityBlogs:mongoose.Types.ObjectId[]
+    id?:mongoose.Types.ObjectId
 }
 
-const communitySchema = new mongoose.Schema({
+const communitySchema = new mongoose.Schema<ICommunity>({
     name:{
         type:String , 
+        required:true ,
+        unique:true
     } ,
     description:{
-        type:String 
+        type:String, 
+        default:"Join Us !"
     } ,
     admin:{
+        type:String ,
+        required:true
+    } ,
+    members : [{
         ref:"User" ,
         type:mongoose.Schema.Types.ObjectId
-    } ,
-    users : {
-        ref:"User" ,
-        type:mongoose.Schema.Types.ObjectId
-    } ,
-    communityBlogs: {
+    }] ,
+    communityBlogs:[ {
         ref:"Blog" ,
         type:mongoose.Schema.Types.ObjectId
-    } , 
+    }] , 
+} , {
+    timestamps:true
 })
+
+const Community :Model<ICommunity> = mongoose.model("Community" , communitySchema);
+export default Community; 
