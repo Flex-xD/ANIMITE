@@ -1,8 +1,8 @@
 import { Response } from "express";
 import { IAuthRequest } from "../middlewares/authMiddleware.js";
 import User, { IUser } from "../models/User.js";
-import Community from "../models/Community.js";
-import mongoose from "mongoose";
+import Community, { ICommunity } from "../models/Community.js";
+import mongoose, { ObjectId } from "mongoose";
 import { string } from "zod";
 import { error, timeStamp } from "console";
 
@@ -24,9 +24,9 @@ export const createCommunityController = async (req: IAuthRequest, res: Response
             return res.status(400).json({ msg: "Community name is required !" });
         }
         const communityRegex = /^[a-zA-Z_.]+$/
-        if(!communityRegex.test(name)) {
+        if (!communityRegex.test(name)) {
             res.status(400).json({
-                msg:"Community names can only contain lowercase letters, underscores (_), and dots (.)"
+                msg: "Community names can only contain letters, underscores (_), and dots (.)"
             })
         }
         if (name.trim().length < 3) {
@@ -94,14 +94,60 @@ const handleError = (error: unknown): string => {
 }
 
 interface ICommunityName {
-    communityName:string
+    communityName: string
 }
 
-export const getCommunityController = async (req: IAuthRequest, res: Response):Promise<void> => {
+export const getCommunityController = async (req: IAuthRequest, res: Response): Promise<void> => {
     try {
         if (!req.userId) {
-            res.status(400).json({msg:"You need to be Authenticated  !"})
+            res.status(400).json({ msg: "You need to be Authenticated  !" })
         }
+        const { communityName } = req.body as ICommunityName;
+        if (!communityName || typeof communityName !== "string" || communityName.trim() == "") {
+            res.status(400).json({
+                success: false,
+                msg: "Please enter a valid community name !"
+            });
+            return;
+        }
+        const communities = await Community.find({ name: { $regex: new RegExp(communityName.trim(), "i") } })
+            .sort({ timeStamp: 1 })
+            .select('name timeStamp')
+            .lean()
+
+        if (!communities.length) {
+            res.status(400).json({
+                success: false,
+                msg: `No communites found matching ${communityName}`,
+                data: []
+            });
+            return;
+        }
+        res.status(200).json({
+            success: true,
+            msg: "Community successfully retrived !",
+            data: communities
+        })
+    } catch (error) {
+        console.log("Error in the community controller ", handleError(error));
+        res.status(500).json({
+            success: false,
+            msg: "An Internal server error occured !",
+            error: handleError(error)
+        })
+    }
+}
+
+export const joinCommunityController = async (req: IAuthRequest, res: Response): Promise<any> => {
+    try {
+        if (!req.userId) {
+            return res.status(400).json({ msg: "You are unauthorized !" })
+        }
+        const member = await User.findById(req.userId) as IUser;
+        if (!member) {
+            return res.status(400).json({ msg: "You need to be authenticated !" });
+        }
+
         const {communityName}=  req.body as ICommunityName;
         if (!communityName || typeof communityName !== "string" || communityName.trim() == "") {
             res.status(400).json({
@@ -109,39 +155,52 @@ export const getCommunityController = async (req: IAuthRequest, res: Response):P
                 msg:"Please enter a valid community name !"
             });
             return;
-        }
-        const regex = new RegExp(communityName.trim() , "i");
-        const communities = await Community.find({name :{$regex:regex}})
-        .sort({timeStamp:1})
-        .select('name timeStamp')
-        .lean()
+        }  
 
-        if (!communities.length) {
-            res.status(400).json({
-                success:false ,
-                msg:`No communites found matching ${communityName}` , 
-                data:[]
-            });
-            return;
+        const session = Community.startSession();
+        (await session).startTransaction();
+
+        try {
+            const community = await Community.find({name :{$regex:new RegExp(communityName.trim() , "i")}}) as ICommunity[]
+            if (!community) {
+                (await session).abortTransaction();
+                return res.status(400).json({
+                    success: false,
+                    msg: `No communites found matching ${communityName}`,
+                    data: []
+                });
+            }
+
+            community[0].members.push(new mongoose.Types.ObjectId(req.userId));
+            if (community[0].id) {
+                member.communitiesJoined?.push(community[0].id);
+            }
+
+            (await session).commitTransaction();
+            
+            res.status(200).json({
+                msg:"Community Joined Successfully !" , 
+                success:true , 
+                data : {
+                    communityName : community[0].name, 
+                    communityId:community[0].id , 
+                    membersCount:community[0].members.length + 1 , 
+                    joinedAt:new Date()
+                }
+            })
+            
+        } catch (error) {
+            (await session).abortTransaction();
+            throw Error;
+        } finally {
+            (await session).endSession();
         }
-        res.status(200).json({
-            success:true ,
-            msg:"Community successfully retrived !" , 
-            data:communities
-        })
     } catch (error) {
-        console.log("Error in the community controller " , handleError(error));
-        res.status(500).json({
+        console.log({error});
+        return res.status(500).json({
+            msg:"Internal server error while joining community !" , 
             success:false ,
-            msg:"An Internal server error occured !" , 
             error:handleError(error)
         })
-    }
-}
-export const joinCommunityController = async (req:IAuthRequest , res:Response) => {
-    try {
-        
-    } catch (error) {
-        
     }
 }
