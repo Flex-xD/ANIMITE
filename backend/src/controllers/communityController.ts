@@ -23,7 +23,7 @@ export const createCommunityController = async (req: IAuthRequest, res: Response
         if (!name || typeof name !== "string") {
             return res.status(400).json({ msg: "Community name is required !" });
         }
-        const communityRegex = /^[a-z_.]+$/;
+        const communityRegex = /^[a-zA-Z_.]+$/
         if(!communityRegex.test(name)) {
             res.status(400).json({
                 msg:"Community names can only contain lowercase letters, underscores (_), and dots (.)"
@@ -83,7 +83,6 @@ export const createCommunityController = async (req: IAuthRequest, res: Response
     }
 }
 
-
 // ? Logic for getting all the communities 
 // ! Improvments : Make types for the community and make it compatible with the code written 
 
@@ -100,6 +99,9 @@ interface ICommunityName {
 
 export const getCommunityController = async (req: IAuthRequest, res: Response):Promise<void> => {
     try {
+        if (!req.userId) {
+            res.status(400).json({msg:"You need to be Authenticated  !"})
+        }
         const {communityName}=  req.body as ICommunityName;
         if (!communityName || typeof communityName !== "string" || communityName.trim() == "") {
             res.status(400).json({
@@ -108,11 +110,9 @@ export const getCommunityController = async (req: IAuthRequest, res: Response):P
             });
             return;
         }
-        
         const regex = new RegExp(communityName.trim() , "i");
         const communities = await Community.find({name :{$regex:regex}})
         .sort({timeStamp:1})
-        .limit(10)
         .select('name timeStamp')
         .lean()
 
@@ -136,5 +136,12 @@ export const getCommunityController = async (req: IAuthRequest, res: Response):P
             msg:"An Internal server error occured !" , 
             error:handleError(error)
         })
+    }
+}
+export const joinCommunityController = async (req:IAuthRequest , res:Response) => {
+    try {
+        
+    } catch (error) {
+        
     }
 }
