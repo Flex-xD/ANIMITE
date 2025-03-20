@@ -5,6 +5,8 @@ import Community, { ICommunity } from "../models/Community.js";
 import mongoose, { ObjectId } from "mongoose";
 import { string } from "zod";
 import { error, timeStamp } from "console";
+import { ICommunityName } from "../types/types.js";
+import { handleError } from "../middlewares/handleError.js";
 
 export const createCommunityController = async (req: IAuthRequest, res: Response) => {
     const session = await mongoose.startSession();
@@ -86,17 +88,6 @@ export const createCommunityController = async (req: IAuthRequest, res: Response
 // ? Logic for getting all the communities 
 // ! Improvments : Make types for the community and make it compatible with the code written 
 
-const handleError = (error: unknown): string => {
-    if (error instanceof Error) {
-        return error.message
-    }
-    return "An Internal Server error occured !"
-}
-
-interface ICommunityName {
-    communityName: string
-}
-
 export const getCommunityController = async (req: IAuthRequest, res: Response): Promise<void> => {
     try {
         if (!req.userId) {
@@ -139,6 +130,7 @@ export const getCommunityController = async (req: IAuthRequest, res: Response): 
 }
 
 export const joinCommunityController = async (req: IAuthRequest, res: Response): Promise<any> => {
+
     try {
         if (!req.userId) {
             return res.status(400).json({ msg: "You are unauthorized !" })
@@ -148,20 +140,20 @@ export const joinCommunityController = async (req: IAuthRequest, res: Response):
             return res.status(400).json({ msg: "You need to be authenticated !" });
         }
 
-        const {communityName}=  req.body as ICommunityName;
+        const { communityName } = req.body as ICommunityName;
         if (!communityName || typeof communityName !== "string" || communityName.trim() == "") {
             res.status(400).json({
-                success:false ,
-                msg:"Please enter a valid community name !"
+                success: false,
+                msg: "Please enter a valid community name !"
             });
             return;
-        }  
+        }
 
         const session = Community.startSession();
         (await session).startTransaction();
 
         try {
-            const community = await Community.find({name :{$regex:new RegExp(communityName.trim() , "i")}}) as ICommunity[]
+            const community = await Community.find({ name: { $regex: new RegExp(communityName.trim(), "i") } }) as ICommunity[]
             if (!community) {
                 (await session).abortTransaction();
                 return res.status(400).json({
@@ -177,18 +169,18 @@ export const joinCommunityController = async (req: IAuthRequest, res: Response):
             }
 
             (await session).commitTransaction();
-            
+
             res.status(200).json({
-                msg:"Community Joined Successfully !" , 
-                success:true , 
-                data : {
-                    communityName : community[0].name, 
-                    communityId:community[0].id , 
-                    membersCount:community[0].members.length + 1 , 
-                    joinedAt:new Date()
+                msg: "Community Joined Successfully !",
+                success: true,
+                data: {
+                    communityName: community[0].name,
+                    communityId: community[0].id,
+                    membersCount: community[0].members.length + 1,
+                    joinedAt: new Date()
                 }
             })
-            
+
         } catch (error) {
             (await session).abortTransaction();
             throw Error;
@@ -196,11 +188,24 @@ export const joinCommunityController = async (req: IAuthRequest, res: Response):
             (await session).endSession();
         }
     } catch (error) {
-        console.log({error});
+        console.log({ error });
         return res.status(500).json({
-            msg:"Internal server error while joining community !" , 
-            success:false ,
-            error:handleError(error)
+            msg: "Internal server error while joining community !",
+            success: false,
+            error: handleError(error)
+        })
+    }
+}
+
+
+export const deleteCommunityController = async (req: IAuthRequest, res: Response) => {
+    try {
+
+    } catch (error) {
+        console.log({ error });
+        return res.status(500).json({
+            msg: "Internal Server error !",
+            sucsess: false
         })
     }
 }
