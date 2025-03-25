@@ -4,40 +4,4 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animate-spin-slow {
-    animation: spin 10s linear infinite;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-float-slow {
-    animation: float 8s ease-in-out infinite;
-  }
-
-  .animate-text-glitch {
-    animation: glitch 4s linear infinite;
-  }
-
-  .animate-text-flicker {
-    animation: flicker 3s infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-  }
-
-  @keyframes glitch {
-    2%, 64% { transform: translate(2px, 0) skew(0deg); }
-    4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-    62% { transform: translate(0, 0) skew(5deg); }
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.95; }
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;1,500&family=Raleway:wght@100..900&display=swap');

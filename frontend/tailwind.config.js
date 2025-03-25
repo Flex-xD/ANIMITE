@@ -6,6 +6,10 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				exo: ['"Exo 2"', 'sans-serif'],
+				raleway: ['Raleway', 'sans-serif']
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
