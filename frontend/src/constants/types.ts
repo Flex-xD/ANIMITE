@@ -1,8 +1,12 @@
-
 export interface IprivateRoutes {
     children: React.ReactNode;
     requireAuth:boolean;
     redirectTo:string;
+}
+
+export interface IAuthButton {
+    children?:React.ReactNode , 
+    buttonName:string
 }
 
 export interface IUser {
