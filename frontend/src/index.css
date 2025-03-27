@@ -1,7 +1,20 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;1,500&family=Raleway:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;1,500&family=Raleway:wght@100..900&display=swap');
+/* Hide scrollbar for Chrome, Safari, and Edge */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll; /* Allow scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+html::-webkit-scrollbar {
+    display: none;
+}

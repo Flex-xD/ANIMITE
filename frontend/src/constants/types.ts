@@ -5,6 +5,12 @@ export interface IprivateRoutes {
 }
 
 export interface IAuthButton {
+    className?:string ,
+    children?:React.ReactNode , 
+    buttonName:string
+}
+
+export interface IProfileButton {
     children?:React.ReactNode , 
     buttonName:string
 }
