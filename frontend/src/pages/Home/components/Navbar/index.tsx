@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { AuthButton, ProfileButton } from "../../../../Built Components";
-import { buttons, tabs } from "../../../../constants/tabs";
+import { buttons, tabs } from "../../../../constants/tabs/index";
 
 const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
 
+    const [isScrolled , setIsScrolled] = useState(false);
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -23,16 +23,15 @@ const Navbar = () => {
         >
 
 
-
             {/* NAVBAR PROFILE BUTTON */}
             <div className="w-[10vw]">
                 <ProfileButton buttonName="PROFILE" />
             </div>
 
             {/* NAVBAR TABS */}
-            <div className="h-[10vh] w-96 flex items-center justify-evenly ml-24">
+            <div className="h-[10vh] w-2/5 flex items-center justify-evenly ml-24">
                 {tabs.map((tab, tabIndex) => (
-                    <span key={tabIndex} className="text-base font-raleway font-extrabold text-[#B8CFFF] cursor-pointer">
+                    <span key={tabIndex} className="text-base font-raleway font-bold text-[#B8CFFF] cursor-pointer">
                         {tab}
                     </span>
                 ))}

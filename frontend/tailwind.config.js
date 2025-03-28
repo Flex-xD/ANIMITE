@@ -8,7 +8,9 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				exo: ['"Exo 2"', 'sans-serif'],
-				raleway: ['Raleway', 'sans-serif']
+				raleway: ['Raleway', 'sans-serif'] ,
+				orbitron:['Orbitron' , 'sans-serif' ] ,
+				iceland:['Iceland' , 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
