@@ -1,5 +1,6 @@
 import backgroundImage from "../../../../images/DALL·E 2025-02-26 16.59.11 - A futuristic anime-style background featuring a neon-lit cyberpunk cityscape. The scene includes towering skyscrapers with holographic billboards, fly.webp"
 import Navbar from "../Navbar"
+import Card from "./components/Card";
 
 
 
@@ -27,10 +28,9 @@ export const HeroSection = () => {
                 </p>
             </div>
 
-            <div className="w-full h-[19rem] {bg-gradient-to-t from-purple-600 to-transparent} border-3 border-white bg-white flex items-center justify-center">
-                <div className="h-[17rem] w-56 border-2 border-black">
-
-                </div>
+            <div className="w-full h-[19rem] {bg-gradient-to-t from-purple-600 to-transparent} flex items-center justify-center">
+                <Card title="SHOW CASE YOUR TALENT" description="Display your anime art, fan fiction, and skills. Inspire fans worldwide with your unique creations!"
+                />
             </div>
         </div>
     )

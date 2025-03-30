@@ -15,6 +15,13 @@ export interface IProfileButton {
     buttonName:string
 }
 
+export interface ICard {
+    title:string ,
+    image ?:string ,
+    color?:[string, string] ,
+    description:string ,
+}
+
 export interface IUser {
     email:string , 
     username:string , 

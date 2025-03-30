@@ -14,7 +14,7 @@ export const AuthButton = ({ buttonName, className }: IAuthButton) => {
 
 export const ProfileButton = ({ buttonName }: IProfileButton) => {
     return (
-        <div className="flex items-center h-12 w-36 overflow-hidden rounded-full bg-gradient-to-b from-[rgba(47,0,255,0.69)] to-[rgba(255,0,255,0.69)]">
+        <div className="flex items-center h-12 w-36 overflow-hidden rounded-full bg-gradient-to-b from-[rgba(47,0,255,0.69)] to-[rgba(255,0,255,0.69)] shadow-2xl boder-[0.1px] border-white">
             <AuthButton
                 className="h-full flex-1 rounded-none border-r-0 bg-transparent pr-2"
                 buttonName={buttonName}
