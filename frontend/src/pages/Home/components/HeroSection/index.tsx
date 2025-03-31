@@ -1,8 +1,7 @@
+import { CARD_COLORS, HEADING_COLORS } from "../../../../constants/constants";
 import backgroundImage from "../../../../images/DALL·E 2025-02-26 16.59.11 - A futuristic anime-style background featuring a neon-lit cyberpunk cityscape. The scene includes towering skyscrapers with holographic billboards, fly.webp"
 import Navbar from "../Navbar"
 import Card from "./components/Card";
-
-
 
 export const HeroSection = () => {
     return (
@@ -17,20 +16,19 @@ export const HeroSection = () => {
             <Navbar />
 
             <div className="flex flex-col items-center text-center px-6 sm:px-0 mt-28">
-                <h2 className="font-orbitron text-5xl sm:text-5xl font-bold bg-gradient-to-r from-[#a650f2] to-[#ec2d89] text-transparent bg-clip-text">
+                <h2 className="font-orbitron text-4xl sm:text-4xl font-bold bg-gradient-to-r from-[#a650f2] to-[#ec2d89] text-transparent bg-clip-text tracking-wider">
                     WELCOME TO
                 </h2>
-                <h1 className="font-orbitron text-7xl sm:text-8xl font-extrabold bg-gradient-to-r from-[#9d51e0] to-[#35cef4] text-transparent bg-clip-text mt-2">
+                <h1 className="font-orbitron text-7xl sm:text-8xl font-extrabold bg-gradient-to-r from-[#9d51e0] to-[#35cef4] text-transparent bg-clip-text mt-1">
                     ANIMITE
-                </h1>
-                <p className="font-iceland text-lg sm:text-xl bg-gradient-to-r from-[#8FE5FF] to-[#E097FF] text-transparent bg-clip-text max-w-2xl mt-4">
+                </h1> 
+                <p className="font-iceland text-lg sm:text-xl bg-gradient-to-r from-[#8FE5FF] to-[#E097FF] text-transparent bg-clip-text max-w-2xl mt-4 px-20">
                     Dive into a cosmic anime odyssey. Connect with fans across the galaxy. Your weeb journey starts here.
                 </p>
             </div>
 
             <div className="w-full h-[19rem] {bg-gradient-to-t from-purple-600 to-transparent} flex items-center justify-center">
-                <Card title="SHOW CASE YOUR TALENT" description="Display your anime art, fan fiction, and skills. Inspire fans worldwide with your unique creations!"
-                />
+                <Card title="SHOWCASE YOUR TALENT" description="Display your anime art, fan fiction, and skills. Inspire fans worldwide with your unique creations!" color={CARD_COLORS.ShowcaseCardColors} headingColor={HEADING_COLORS.ShowcaseCardHeadingColors}/>
             </div>
         </div>
     )

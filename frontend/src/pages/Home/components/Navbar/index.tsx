@@ -18,7 +18,7 @@ const Navbar = () => {
         <div
             className={`fixed top-0 left-1/2 transform -translate-x-1/2 h-[12vh] flex items-center justify-evenly transition-all duration-300 ease-in-out ${
                 isScrolled
-                    ? "w-11/12 bg-opacity-10 backdrop-blur-lg bg-gray-900 border-none shadow-xl rounded-full top-3"
+                    ? "w-11/12 bg-opacity-10 backdrop-blur-lg bg-gray-900 border-none shadow-xl rounded-full top-3 z-10"
                     : "w-full"
             }`}
         >

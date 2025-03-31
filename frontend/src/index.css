@@ -29,4 +29,6 @@ html, body {
 /* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
 html::-webkit-scrollbar {
     display: none;
+
+    
 }
