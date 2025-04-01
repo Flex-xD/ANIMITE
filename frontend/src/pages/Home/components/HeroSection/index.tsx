@@ -1,4 +1,4 @@
-import { CARD_COLORS, HEADING_COLORS } from "../../../../constants/constants";
+import { cards } from "../../../../constants/cards";
 import backgroundImage from "../../../../images/DALL·E 2025-02-26 16.59.11 - A futuristic anime-style background featuring a neon-lit cyberpunk cityscape. The scene includes towering skyscrapers with holographic billboards, fly.webp"
 import Navbar from "../Navbar"
 import Card from "./components/Card";
@@ -8,7 +8,7 @@ export const HeroSection = () => {
         <div
             className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden"
             style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 31, 0.85) 60%, rgba(168, 48, 219, 0.85) 100%), url(${backgroundImage})`,
+                backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 31, 0.85) 60%, rgba(168, 28, 264, 0.95) 100%), url(${backgroundImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
@@ -27,8 +27,10 @@ export const HeroSection = () => {
                 </p>
             </div>
 
-            <div className="w-full h-[19rem] {bg-gradient-to-t from-purple-600 to-transparent} flex items-center justify-center">
-                <Card title="SHOWCASE YOUR TALENT" description="Display your anime art, fan fiction, and skills. Inspire fans worldwide with your unique creations!" color={CARD_COLORS.ShowcaseCardColors} headingColor={HEADING_COLORS.ShowcaseCardHeadingColors}/>
+            <div className="w-full h-[19rem] {bg-gradient-to-t from-purple-600 to-transparent} flex items-center justify-evenly">
+                {cards.map((card, cardIndex) => (
+                    <Card key={cardIndex} title={card.title} description={card.description}  color={card.cardColors} headingColor={card.headingColors} image={card.image}/>
+                ))}
             </div>
         </div>
     )
