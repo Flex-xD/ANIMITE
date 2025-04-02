@@ -32,6 +32,9 @@ export const HeroSection = () => {
                     <Card key={cardIndex} title={card.title} description={card.description}  color={card.cardColors} headingColor={card.headingColors} image={card.image}/>
                 ))}
             </div>
+            <div className="h-1 w-3/4 bg-white mt-1 rounded-full blur-sm">
+
+            </div>
         </div>
     )
 }
