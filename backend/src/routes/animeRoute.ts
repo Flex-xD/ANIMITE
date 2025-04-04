@@ -1,8 +1,9 @@
 import express from "express";
-import AnimeNewsController, { getAnimeNewsController } from "../controllers/animeController.js";
+import { getAnimeNewsController } from "../controllers/animeController.js";
+import { verifyToken } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 
-router.get("/anime-news" , AnimeNewsController.getLatestAnimeNews);
+router.get("/anime-news" , verifyToken , getAnimeNewsController);
 
 export default router;
