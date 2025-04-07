@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import { useAppStore } from './store';
 import { IprivateRoutes } from './constants/types';
 import NewsPage from './pages/News';
+import TrendingAnimeNews from './pages/News';
 
 
 const PrivateRoutes = ({ children, requireAuth, redirectTo }: IprivateRoutes) => {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<PrivateRoutes requireAuth={true} redirectTo='/auth'><Profile /></PrivateRoutes>} />
         <Route path='/auth' element={<PrivateRoutes requireAuth={false} redirectTo='/'><Auth /></PrivateRoutes>} />
-        <Route path='/news' element={<PrivateRoutes requireAuth={true} redirectTo='/auth'><NewsPage/></PrivateRoutes>}/>
+        <Route path='/news' element={<PrivateRoutes requireAuth={true} redirectTo='/auth'><TrendingAnimeNews/></PrivateRoutes>}/>
         <Route path="*" element={<Auth />} />
       </Routes>
     </BrowserRouter>

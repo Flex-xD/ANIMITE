@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AuthButton, ProfileButton } from "../../../../Built Components";
 import { buttons, tabs } from "../../../../constants/tabs/index";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -34,14 +35,15 @@ const Navbar = () => {
                 }`}
             >
                 {tabs.map((tab, tabIndex) => (
-                    <span
+                    <Link
+                        to={`/${tab.toLowerCase()}`}
                         key={tabIndex}
                         className={`cursor-pointer text-[#B8CFFF] font-raleway font-bold transition-all duration-300 ${
                             isScrolled ? "text-[clamp(12px,1vw,14px)]" : "text-lg"
                         }`}
                     >
                         {tab}
-                    </span>
+                    </Link>
                 ))}
             </div>
 

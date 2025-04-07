@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
+import { colors } from "../../constants/colors";
 
 
 
@@ -67,15 +68,7 @@ const Auth = () => {
     const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (
         e: React.ChangeEvent<HTMLInputElement>
     ) => setter(e.target.value);
-    const colors = {
-        bgDark: "bg-[#150028]",
-        bgGradient: "bg-gradient-to-br from-[#0d001a] via-[#1a0033] to-[#2a004d]",
-        borderNeon: "border-[#6b00ff]/30",
-        textNeon: "text-[#d4bfff]",
-        accentPurple: "bg-[#6b00ff]",
-        accentPink: "bg-[#ff00cc]",
-        glowPurple: "shadow-[#6b00ff]/40",
-    };
+
 
     return (
         <motion.div

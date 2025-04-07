@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 router.get("/anime-news" , verifyToken , getAnimeNewsController);
-router.get("/trending-anime-news" , verifyToken , getTrendingAnimeNewsController);
+router.get("/trending-anime-news" , getTrendingAnimeNewsController);
 
 export default router;
