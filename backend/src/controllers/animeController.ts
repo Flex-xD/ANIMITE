@@ -110,15 +110,11 @@ export const getTrendingAnimeNewsController = async (req: Request, res: Response
                 handleApiError("newsLimit must be between 1 and 5", StatusCodes.BAD_REQUEST)
             );
         }
-
-        // STEP 1: Fetch trending/top/popular anime (you can use seasonal too)
         const trendingResponse = await axios.get(`${baseURL}/top/anime`, {
-            params: { limit: animeLimit, filter: 'airing' } // airing = currently running
+            params: { limit: animeLimit, filter: 'airing' } 
         });
 
         const trendingAnimes = trendingResponse.data.data || [];
-
-        // STEP 2: Fetch news for each trending anime in parallel
         const newsResults = await Promise.all(trendingAnimes.map(async (anime: any) => {
             try {
                 const newsResponse = await axios.get(`${baseURL}/anime/${anime.mal_id}/news`);

@@ -4,7 +4,7 @@ import { IAuthButton, IProfileButton } from "../constants/types"
 
 export const AuthButton = ({ buttonName, className }: IAuthButton) => {
     return (
-        <Button className={`h-[6vh] w-20 w-max-24 rounded-3xl bg-gradient-to-b from-[#5100ff] to-[#ff00ff] font-exo font-bold text-[#FFFFFF] text-xs ${className}`}>
+        <Button className={`h-[6vh] w-36 w-max-24 rounded-3xl bg-gradient-to-b from-[#00bfff] to-[#b20bff] font-exo font-bold text-[#FFFFFF] text-xs ${className}`}>
             <span>
                 {buttonName}
             </span>

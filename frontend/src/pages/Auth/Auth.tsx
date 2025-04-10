@@ -47,12 +47,11 @@ const Auth = () => {
             const endpoint = isSignup ? REGISTER_ROUTES : LOGIN_ROUTES;
             const payload = isSignup ? { email, username, password } : { email, password };
             const response = await apiClient.post(endpoint, payload);
-            toast.success("It is working here no problems");
             setUserInfo(response.data.user);
             setIsAuthenticated(true);
             console.log({ response });
             setTimeout(() => {
-                navigate("/profile");
+                isSignup ? navigate("/profile") : navigate("/");
             }, 100); 
             toast.success(`${isSignup ? "Signup" : "Login"} successful!`);
         } catch (error) {
