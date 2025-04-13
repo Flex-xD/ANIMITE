@@ -1,13 +1,25 @@
 import { useState, useEffect } from "react";
 import { AuthButton, ProfileButton } from "../../../../Built Components";
 import { buttons, tabs } from "../../../../constants/tabs/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppStore } from "../../../../store";
-import { LogOut, User, User2 } from "lucide-react";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const isAuthenticated = useAppStore((state) => state.isAuthenticated);
+    const navigate = useNavigate();
+
+    const logout = () => {
+        alert("Logout button clicked !");
+    }
+
+    const handleClick = () => {
+        if (isAuthenticated) {
+            logout();
+        } else {
+            navigate("/auth")
+        }
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -53,8 +65,8 @@ const Navbar = () => {
             {/* NAVBAR LOGIN & LOGOUT BUTTONS */}
             <div className="w-44 h-[10vh] flex items-center justify-around">
                 {buttons.map((button, buttonIndex) => (
-                    <AuthButton key={buttonIndex} buttonName={`${button}`}>
-                        {isAuthenticated ? <LogOut /> : <User2 />} {button}
+                    <AuthButton key={buttonIndex} buttonName={`${button}`} onCLick={handleClick}>
+                        {button}
                     </AuthButton>
                 ))}
             </div>

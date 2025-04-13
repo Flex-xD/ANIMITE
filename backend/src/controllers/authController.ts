@@ -14,9 +14,16 @@ export const registerController = async (req:Request , res:Response) => {
     if (!email || !username || !password) {
         return res.status(400).json({msg : "Please fill in all the fields !"});
     }
-    const existingUser = await User.findOne({email , username});
-    if(existingUser) {
-        return res.status(400).json({msg:"User already exists !"})
+    const existingUser = await User.findOne({ 
+        $or: [{ email }, { username }] 
+    });
+    
+    if (existingUser) {
+        if (existingUser.email === email) {
+            return res.status(400).json({ msg: "Email already exists!" });
+        } else {
+            return res.status(400).json({ msg: "Username already taken!" });
+        }
     }
     const usernameRegex = /^[a-z_.]+$/;
         if (!usernameRegex.test(username)) {

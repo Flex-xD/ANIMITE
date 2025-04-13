@@ -57,6 +57,9 @@ const Auth = () => {
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log({ error });
+                if (error.response || error.response!.data.msg) {
+                    return toast.error(error.response?.data.msg);
+                }
                 return toast.error(`${isSignup ? "Signup" : "Login"} failed!`);
             } else {
                 toast.error("An error occurred!");

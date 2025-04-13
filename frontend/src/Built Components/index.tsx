@@ -2,9 +2,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Button } from "../components/ui/button"
 import { IAuthButton, IProfileButton } from "../constants/types"
 
-export const AuthButton = ({ buttonName, className }: IAuthButton) => {
+export const AuthButton = ({ buttonName, className , onCLick }: IAuthButton) => {
     return (
-        <Button className={`h-[6vh] w-36 w-max-24 rounded-3xl bg-gradient-to-b from-[#00bfff] to-[#b20bff] font-exo font-bold text-[#FFFFFF] text-xs ${className}`}>
+        <Button className={`h-[6vh] w-36 w-max-24 rounded-3xl bg-gradient-to-b from-[#00bfff] to-[#b20bff] font-exo font-bold text-[#FFFFFF] text-xs ${className}`} onClick={onCLick}>
             <span>
                 {buttonName}
             </span>

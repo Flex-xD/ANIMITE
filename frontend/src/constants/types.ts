@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export interface IprivateRoutes {
     children: React.ReactNode;
     requireAuth: boolean;
@@ -7,8 +9,18 @@ export interface IprivateRoutes {
 export interface IAuthButton {
     className?: string,
     children?: React.ReactNode,
-    buttonName: string
+    buttonName: string , 
+    navigate?:string ,
+    onCLick?:() => void
 }
+
+export interface IRoute {
+    path: string;
+    element: JSX.Element;
+    isPrivate?: boolean;
+    redirectTo?: string;
+}
+
 
 export interface IProfileButton {
     children?: React.ReactNode,
