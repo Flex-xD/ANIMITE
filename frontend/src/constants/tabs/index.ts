@@ -1,5 +1,3 @@
-import { useAppStore } from "../../store";
-const isAuthenticated = useAppStore.getState().isAuthenticated;
-
+// THIS FILE CONTAINS THE TABS FOR THE ANIMITE 
 export const tabs = ["HOME", "ANIME", "COMMUNITY", "ABOUT US" , "NEWS"];
-export const buttons = [`${isAuthenticated ? "LOGOUT" : "CREATE ACCOUNT "}`];
+export const buttons = ["CREATE ACCOUNT"];

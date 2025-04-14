@@ -11,16 +11,8 @@ export interface IAuthButton {
     children?: React.ReactNode,
     buttonName: string , 
     navigate?:string ,
-    onCLick?:() => void
+    onClick?:() => void
 }
-
-export interface IRoute {
-    path: string;
-    element: JSX.Element;
-    isPrivate?: boolean;
-    redirectTo?: string;
-}
-
 
 export interface IProfileButton {
     children?: React.ReactNode,
@@ -50,4 +42,12 @@ export interface IUser {
     badges: [],
     notifications: string[],
     watchList: []
+}
+
+export interface IRoute {
+    path: string;
+    element: JSX.Element;
+    isPrivate?: boolean;
+    redirectTo?: string;
+    allowAuthenticated?: boolean; 
 }

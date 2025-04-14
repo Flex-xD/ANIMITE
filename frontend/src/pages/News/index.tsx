@@ -3,7 +3,7 @@ import axios from 'axios';
 import AnimeNewsCard from './components/AnimeNewsCard.tsx';
 import { AnimeWithNews, TrendingAnimeResponse } from '../../constants/news/index.ts';
 
-const TrendingAnimeNews: React.FC = () => {
+const NewsComponent: React.FC = () => {
     const [animeData, setAnimeData] = useState<AnimeWithNews[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -70,4 +70,4 @@ const TrendingAnimeNews: React.FC = () => {
     );
 };
 
-export default TrendingAnimeNews;
+export default NewsComponent;

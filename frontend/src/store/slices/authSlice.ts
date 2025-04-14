@@ -2,7 +2,7 @@ import { StateCreator } from "zustand";
 import { IUser } from "../../constants/types";
 
 export interface AuthState {
-    userInfo:IUser | undefined 
+    userInfo:IUser | undefined | null 
     setUserInfo:(userInfo:any) => void 
     isAuthenticated:boolean 
     setIsAuthenticated:(isAuthenticated:boolean) => void

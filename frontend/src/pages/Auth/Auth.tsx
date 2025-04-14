@@ -47,13 +47,15 @@ const Auth = () => {
             const endpoint = isSignup ? REGISTER_ROUTES : LOGIN_ROUTES;
             const payload = isSignup ? { email, username, password } : { email, password };
             const response = await apiClient.post(endpoint, payload);
-            setUserInfo(response.data.user);
-            setIsAuthenticated(true);
-            console.log({ response });
-            setTimeout(() => {
-                isSignup ? navigate("/profile") : navigate("/");
-            }, 100); 
-            toast.success(`${isSignup ? "Signup" : "Login"} successful!`);
+            if(response.status === 200 || response.status === 201) {
+                setUserInfo(response.data.user);
+                setIsAuthenticated(true);
+                console.log({ response });
+                setTimeout(() => {
+                    isSignup ? navigate("/profile") : navigate("/");
+                }, 300); 
+                toast.success(`${isSignup ? "Signup" : "Login"} successful!`);
+            }
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log({ error });

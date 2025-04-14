@@ -3,23 +3,13 @@ import { useAppStore } from './store';
 import { JSX } from 'react';
 
 import Auth from './pages/Auth/Auth';
-import TrendingAnimeNews from './pages/News';
 import ProfilePage from './pages/Profile/Profile';
 import Home from './pages/Home/Home';
-// import { IRoute } from './constants/types';
-
-// Updated IRoute interface to include allowAuthenticated
-interface IRoute {
-  path: string;
-  element: JSX.Element;
-  isPrivate?: boolean;
-  redirectTo?: string;
-  allowAuthenticated?: boolean; // New flag to allow authenticated users
-}
+import NewsComponent from './pages/News';
+import { IRoute } from './constants/types';
 
 const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string, allowAuthenticated: boolean = false) => {
   const { isAuthenticated } = useAppStore();
-  // If allowAuthenticated is true, render the component regardless of auth status
   if (allowAuthenticated) {
     return Component;
   }
@@ -28,10 +18,10 @@ const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string
 };
 
 const routes: IRoute[] = [
-  { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, // Allow both auth and unauth
+  { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, 
   { path: '/profile', element: <ProfilePage />, isPrivate: true, redirectTo: '/auth' },
   { path: '/auth', element: <Auth />, isPrivate: false, redirectTo: '/' },
-  { path: '/news', element: <TrendingAnimeNews />, isPrivate: true, redirectTo: '/auth' },
+  { path: '/news', element: <NewsComponent />, isPrivate: true, redirectTo: '/auth' },
 ];
 
 function App() {
