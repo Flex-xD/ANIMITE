@@ -127,7 +127,7 @@ export const ProfileButton = ({ buttonName }: IProfileButton) => {
                 className="relative"
                 variants={{
                     initial: { x: -20, opacity: 0, scale: 0.8 },
-                    hover: { x: -40, opacity: 1, scale: 1.1 },
+                    hover: { x: -60, opacity: 1, scale: 1.1 },
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
