@@ -29,6 +29,7 @@ module.exports = {
 				'night-pulse-start': '#1A1A2E',
 				'night-pulse-end': '#FF69B4',
 			},
+			
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

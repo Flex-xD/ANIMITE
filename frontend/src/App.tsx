@@ -9,6 +9,7 @@ import NewsComponent from './pages/News';
 import { IRoute } from './constants/types';
 import Anime from './pages/Anime';
 import Community from './pages/Community';
+import AboutUs from './pages/About us';
 
 const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string, allowAuthenticated: boolean = false) => {
   const { isAuthenticated } = useAppStore();
@@ -24,8 +25,8 @@ const routes: IRoute[] = [
   { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, 
   {path: '/anime' , element:<Anime/> , isPrivate:true , redirectTo:'/auth'},
   {path: '/community' , element:<Community/> , isPrivate:true , redirectTo:'/auth'},
-  {path: '/community' , element:<Community/> , isPrivate:true , redirectTo:'/auth'},
-  { path: '/about-us', element: <NewsComponent />, isPrivate: false, redirectTo: '/' },
+  { path: '/about-us', element: <AboutUs />, isPrivate: false, redirectTo: '/' },
+  {path: '/news' , element:<NewsComponent/> , isPrivate:true , redirectTo:'/auth'},
   { path: '/auth', element: <Auth />, isPrivate: false, redirectTo: '/' }
 ];
 
