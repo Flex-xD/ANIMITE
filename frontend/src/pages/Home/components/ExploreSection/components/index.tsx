@@ -1,5 +1,7 @@
 import AnimiteLogo from "../../../../../images/animiteLogo.png";
 
+
+// ? Animite Logo Component
 export const AnimiteLogoComponent = () => {
     return (
 
@@ -11,5 +13,14 @@ export const AnimiteLogoComponent = () => {
             />
         </div>
 
+    )
+}
+
+// ? Create & Explore Button Component
+export const CreateExploreButtonComponent = () => {
+    return (
+        <div>
+            
+        </div>
     )
 }

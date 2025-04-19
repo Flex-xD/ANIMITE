@@ -216,7 +216,7 @@ export const ProfileAvatar = () => {
 
         const handleMouseLeave = () => {
             particlesRef.current.forEach(particle => {
-                if (!particle) return;
+                if(!particle) return;
                 particle.style.opacity = '0';
                 particle.style.transform = 'translate(-50%, -50%)';
                 particle.style.transitionDuration = '600ms';
