@@ -15,12 +15,3 @@ export const AnimiteLogoComponent = () => {
 
     )
 }
-
-// ? Create & Explore Button Component
-export const CreateExploreButtonComponent = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
