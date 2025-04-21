@@ -184,7 +184,7 @@ export const ProfileButton = ({ buttonName }: IProfileButton) => {
 };
 
 
-export const ProfileAvatar = () => {
+export const ProfileAvatar = ({ }: { className: string }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const particlesRef = useRef<HTMLDivElement[]>([]);
 

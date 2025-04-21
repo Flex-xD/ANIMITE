@@ -51,3 +51,7 @@ export interface IRoute {
     redirectTo?: string;
     allowAuthenticated?: boolean; 
 }
+
+export interface IProfileAvatar {
+    className?:string
+}

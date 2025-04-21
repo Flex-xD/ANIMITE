@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ProfileAvatar } from "../../../../Built Components";
-import { AnimiteLogoComponent } from "./components";
+import { AnimiteLogoComponent, MergedAnimiteSection } from "./components";
+import AnimiteLogo from "../../../../images/image.png";
+
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -113,57 +115,7 @@ function ExploreSection() {
             </div>
 
             {/* Main Content */}
-            <div className="relative max-w-7xl w-full flex flex-col lg:flex-ro items-center justify-between gap-16">
-                {/* Left Content Card */}
-                <motion.div
-                    variants={itemVariants}
-                    className="w-full lg:w-1/2 bg-black/30 backdrop-blur-xl rounded-2xl p-10 border border-white/10 shadow-xl"
-                    whileHover={{
-                        y: -10,
-                        boxShadow: "0 25px 50px -12px rgba(147, 51, 234, 0.6)",
-                    }}
-                    transition={{ duration: 0.4 }}
-                >
-                    <div className="flex flex-col items-center gap-8 z-0">
-                        <motion.div
-                            whileHover={{ scale: 1.1, rotate: 8 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            <ProfileAvatar />
-                        </motion.div>
-                        <motion.h2
-                            className="font-orbitron font-extrabold text-4xl md:text-5xl lg:text-6xl text-center bg-gradient-to-r from-[#00f0b0] via-[#68FFDC] to-[#B7FFF7] text-transparent bg-clip-text"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3, duration: 0.6 }}
-                        >
-                            UNLEASH YOUR WEEB VIBE
-                        </motion.h2>
-                        <motion.p
-                            className="font-raleway text-lg md:text-xl text-center text-white/80 leading-relaxed max-w-lg"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
-                        >
-                            Dive into a universe of anime fandom—share your art, craft blogs, curate watchlists, join quizzes, and connect with fellow weebs!
-                        </motion.p>
-                    </div>
-                </motion.div>
-
-                {/* Right Logo */}
-                <motion.div
-                    variants={itemVariants}
-                    className="w-2/3 lg:w-1//2 flex items-center justify-center"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.4 }}
-                >
-                    <AnimiteLogoComponent />
-                </motion.div>
-            </div>
+            <MergedAnimiteSection/>
 
             {/* Features Grid */}
             <motion.div
