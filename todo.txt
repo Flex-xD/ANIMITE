@@ -1,0 +1,12 @@
+
+
+<!-- ? Things I have to fix at this stage of ANIMITE : -->
+1. Application is not able to fully identitify whether the user is AUTHORIZED or UNAUTHORIZED after the signup/login,
+2. Fix the trendingAnimeNewsController for getting the news that I want to show on the frontend 
+3. I should make rough frontend of the backend controllers that I have made and try to test them , and afterwards I will desgin them 
+
+
+<!-- ? THINGS I HAVE TO DO NEXT :  -->
+1. Complete the HOME PAGE frontend ( with responsiveness )
+2. Write code in Component (Creating community and creating live chat with different roles of the memeber and special access to the admin for the community , image uploading etc )!
+3. Create frontend for user blogs , images as posts and try to display them on the frontend while connecting it to the backend app
