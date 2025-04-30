@@ -1,182 +1,238 @@
-import { motion } from "framer-motion";
-import  MergedAnimiteSection  from "./components/index";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import MergedAnimiteSection from "./components/index";
 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.3,
-        },
-    },
-};
+const CyberGridBackground = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const controls = useAnimation();
 
+    useEffect(() => {
+        if (!canvasRef.current) return;
 
-const neonGlow = {
-    initial: {
-        boxShadow: "0 0 0 0 rgba(255, 105, 180, 0)",
-        borderColor: "rgba(255, 255, 255, 0.1)",
-    },
-    hover: {
-        boxShadow: [
-            "0 0 10px 3px rgba(255, 105, 180, 0.5)",
-            "0 0 20px 6px rgba(255, 105, 180, 0.6)",
-            "0 0 15px 4px rgba(255, 105, 180, 0.5)",
-        ],
-        borderColor: "rgba(255, 182, 193, 0.9)",
-        transition: {
-            duration: 0.6,
-            repeat: Infinity,
-            repeatType: "reverse" as const,
-        },
-    },
-};
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-const featureItems = [
-    {
-        title: "Create Content",
-        description: "Share your anime reviews, blogs, and recommendations with the global community.",
-        icon: "✍️",
-        gradient: "from-pink-500 to-purple-600",
-    },
-    {
-        title: "Showcase Art",
-        description: "Display your fan art and connect with other talented artists.",
-        icon: "🎨",
-        gradient: "from-blue-600 to-purple-700",
-    },
-    {
-        title: "Curate Lists",
-        description: "Build and share your ultimate anime watchlists and favorites.",
-        icon: "📋",
-        gradient: "from-cyan-500 to-blue-600",
-    },
-    {
-        title: "Engage in Forums",
-        description: "Join vibrant discussions about your favorite anime series.",
-        icon: "💬",
-        gradient: "from-purple-500 to-pink-600",
-    },
-    {
-        title: "Challenge Quizzes",
-        description: "Test your anime expertise with exciting community quizzes.",
-        icon: "🧠",
-        gradient: "from-blue-500 to-cyan-600",
-    },
-    {
-        title: "Collect Badges",
-        description: "Earn unique badges to showcase your anime passion.",
-        icon: "🏆",
-        gradient: "from-purple-600 to-blue-700",
-    },
-];
+        // Set canvas dimensions
+        const resizeCanvas = () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-function ExploreSection() {
+        // Cyber grid animation
+        let frameCount = 0;
+        const animateGrid = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw dynamic grid
+            const gridSize = 40;
+            ctx.strokeStyle = `rgba(100, 255, 255, ${0.05 + Math.sin(frameCount * 0.02) * 0.05})`;
+            ctx.lineWidth = 1;
+
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                const offsetX = Math.sin(frameCount * 0.01 + x * 0.005) * 10;
+                ctx.beginPath();
+                ctx.moveTo(x + offsetX, 0);
+                ctx.lineTo(x + offsetX, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                const offsetY = Math.cos(frameCount * 0.01 + y * 0.005) * 10;
+                ctx.beginPath();
+                ctx.moveTo(0, y + offsetY);
+                ctx.lineTo(canvas.width, y + offsetY);
+                ctx.stroke();
+            }
+
+            // Draw floating particles
+            ctx.fillStyle = 'rgba(255, 100, 255, 0.8)';
+            for (let i = 0; i < 20; i++) {
+                const x = (Math.sin(frameCount * 0.02 + i * 0.5) * canvas.width * 0.3 + canvas.width / 2);
+                const y = (Math.cos(frameCount * 0.015 + i * 0.3) * canvas.height * 0.3 + canvas.height / 2);
+                const size = 2 + Math.sin(frameCount * 0.05 + i) * 1.5;
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            frameCount++;
+            requestAnimationFrame(animateGrid);
+        };
+
+        const animationId = requestAnimationFrame(animateGrid);
+
+        // Animate glow elements
+        controls.start({
+            opacity: [0.3, 0.6, 0.3],
+            transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        });
+
+        return () => {
+            cancelAnimationFrame(animationId);
+            window.removeEventListener('resize', resizeCanvas);
+        };
+    }, [controls]);
+
     return (
-        <motion.section
-            className="relative min-h-screen w-full bg-gradient-to-b from-[rgba(168,28,264,0.95)] to-[#1a0b3b] flex flex-col items-center justify-center py-20 px-6 overflow-hidden z-0"
+        <>
+            <canvas
+                ref={canvasRef}
+                className="absolute inset-0 w-full h-full pointer-events-none opacity-30"
+            />
+            <motion.div
+                className="absolute -top-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"
+                animate={controls}
+            />
+            <motion.div
+                className="absolute -bottom-40 -right-40 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl"
+                animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                    transition: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }
+                }}
+            />
+        </>
+    );
+};
+
+const FeatureCard = ({
+    title,
+    description,
+    icon,
+    gradient
+}: {
+    title: string;
+    description: string;
+    icon: string;
+    gradient: string;
+}) => {
+    return (
+        <motion.div
+            className="relative bg-[#380955] backdrop-blur-md rounded-xl p-6 border border-white/40 hover:border-cyan-400/50 transition-all duration-300 overflow-hidden group"
+            whileHover={{ y: -5 }}
         >
-            {/* Dynamic Anime-Style Background Animation */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Grid Pattern */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10`} />
+            <div className="relative flex flex-col h-full">
                 <motion.div
-                    className="absolute w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wOCkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"
-                    animate={{ opacity: [0.2, 0.3, 0.2] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                />
-                {/* Glowing Particles */}
+                    className="text-5xl mb-4"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                >
+                    {icon}
+                </motion.div>
+                <h3 className="font-orbitron text-xl font-semibold text-white mb-2 tracking-wider">
+                    {title}
+                </h3>
+                <p className="font-raleway text-white/70 text-sm leading-relaxed">
+                    {description}
+                </p>
                 <motion.div
-                    className="absolute w-4 h-4 bg-pink-400 rounded-full top-1/4 left-1/4 blur-sm"
-                    animate={{ y: [0, -20, 0], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div
-                    className="absolute w-3 h-3 bg-cyan-400 rounded-full bottom-1/3 right-1/4 blur-sm"
-                    animate={{ y: [0, 15, 0], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                />
-                <motion.div
-                    className="absolute w-5 h-5 bg-purple-400 rounded-full top-1/2 left-3/4 blur-sm"
-                    animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                />
-                {/* Rotating Geometric Shape (Anime Sparkle Effect) */}
-                <motion.div
-                    className="absolute w-32 h-32 border-2 border-dashed border-cyan-300 rounded-[20%] top-1/3 right-1/3 opacity-30"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                    className="absolute w-16 h-16 border-2 border-dashed border-pink-300 rounded-[20%] top-1/3 right-1/3 opacity-30"
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                />
-                {/* Gradient Glow Blobs */}
-                <motion.div
-                    className="absolute w-96 h-96 bg-pink-500/10 rounded-full -top-20 -left-20 blur-3xl"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                />
-                <motion.div
-                    className="absolute w-96 h-96 bg-blue-500/10 rounded-full -bottom-20 -right-20 blur-3xl"
-                    animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.4, 0.3] }}
-                    transition={{ duration: 4, repeat: Infinity }}
+                    className={`h-0.5 bg-gradient-to-r ${gradient} mt-4 w-0 group-hover:w-full`}
+                    transition={{ duration: 0.5 }}
                 />
             </div>
+        </motion.div>
+    );
+};
+
+const ExploreSection = () => {
+    const featureItems = [
+        {
+            title: "Create Content",
+            description: "Share your anime reviews, blogs, and recommendations with the global community.",
+            icon: "✍️",
+            gradient: "from-pink-500 to-purple-600",
+        },
+        {
+            title: "Showcase Art",
+            description: "Display your fan art and connect with other talented artists.",
+            icon: "🎨",
+            gradient: "from-blue-600 to-purple-700",
+        },
+        {
+            title: "Curate Lists",
+            description: "Build and share your ultimate anime watchlists and favorites.",
+            icon: "📋",
+            gradient: "from-cyan-500 to-blue-600",
+        },
+        {
+            title: "Engage in Forums",
+            description: "Join vibrant discussions about your favorite anime series.",
+            icon: "💬",
+            gradient: "from-purple-500 to-pink-600",
+        },
+        {
+            title: "Challenge Quizzes",
+            description: "Test your anime expertise with exciting community quizzes.",
+            icon: "🧠",
+            gradient: "from-blue-500 to-cyan-600",
+        },
+        {
+            title: "Collect Badges",
+            description: "Earn unique badges to showcase your anime passion.",
+            icon: "🏆",
+            gradient: "from-purple-600 to-blue-700",
+        },
+    ];
+
+    return (
+        <section className="relative min-h-screen w-full bg-gradient-to-b from-[#6c2bb6] to-[#1a0b3b] flex flex-col items-center justify-center py-16 px-4 overflow-hidden">
+            {/* Futuristic Background */}
+            <CyberGridBackground/>
+
+            {/* Data Stream Effects */}
+            <motion.div
+                className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/80 to-transparent"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+                className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/80 to-transparent"
+                initial={{ x: "100%" }}
+                animate={{ x: "-100%" }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 3 }}
+            />
 
             {/* Main Content */}
-            <MergedAnimiteSection className="-mt-7 -mb-8"/>
+            <div className="relative w-full max-w-6xl mx-auto">
+                <MergedAnimiteSection className="-mt-4 -mb-10" />
+            </div>
 
             {/* Features Grid */}
             <motion.div
-                className="mt-24 w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={containerVariants}
+                className="mt-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ staggerChildren: 0.1 }}
             >
                 {featureItems.map((feature, index) => (
-                    <motion.div
-                        key={index}
-                        className="relative bg-black/40 backdrop-blur-md rounded-lg p-6 border border-white/10 overflow-hidden"
-                        variants={neonGlow}
-                        initial="initial"
-                        whileHover="hover"
-                        transition={{ duration: 0.4 }}
-                    >
-                        <motion.div
-                            className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 -z-10`}
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 0.4 }}
-                            transition={{ duration: 0.5 }}
-                        />
-                        <div className="relative flex flex-col h-full">
-                            <motion.div
-                                className="text-5xl mb-4"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ type: "spring", stiffness: 400 }}
-                            >
-                                {feature.icon}
-                            </motion.div>
-                            <h3 className="font-orbitron text-xl font-semibold text-white mb-2 tracking-wider">
-                                {feature.title}
-                            </h3>
-                            <p className="font-raleway text-white/70 text-sm leading-relaxed">
-                                {feature.description}
-                            </p>
-                            <motion.div
-                                className={`h-0.5 bg-gradient-to-r ${feature.gradient} mt-4`}
-                                initial={{ scaleX: 0 }}
-                                whileHover={{ scaleX: 1 }}
-                                transition={{ duration: 0.5 }}
-                            />
-                        </div>
-                    </motion.div>
+                    <FeatureCard key={index} {...feature} />
                 ))}
             </motion.div>
-        </motion.section>
+
+            {/* Floating UI Elements */}
+            <motion.div
+                className="absolute top-1/3 left-1/4 w-24 h-24 border-2 border-cyan-400/20 rounded-full pointer-events-none"
+                animate={{
+                    rotate: 360,
+                    scale: [1, 1.2, 1],
+                    transition: { duration: 15, repeat: Infinity, ease: "linear" }
+                }}
+            />
+            <motion.div
+                className="absolute bottom-1/4 right-1/4 w-16 h-16 border-2 border-pink-400/20 rounded-full pointer-events-none"
+                animate={{
+                    rotate: -360,
+                    scale: [1, 1.3, 1],
+                    transition: { duration: 12, repeat: Infinity, ease: "linear", delay: 2 }
+                }}
+            />
+        </section>
     );
-}
+};
 
 export default ExploreSection;

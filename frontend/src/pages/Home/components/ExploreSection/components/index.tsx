@@ -31,21 +31,6 @@ const itemVariants: Variants = {
     }
 };
 
-// ? Animite Logo Component
-// export const AnimiteLogoComponent = () => {
-//     return (
-
-//         <div className="h-[48vh] w-2/4 border border-white/30 backdrop-blur-md rounded-2xl flex items-center justify-center p-4 shadow-2xl animite-float-pulse bg-black/10">
-//             <img
-//                 src={AnimiteLogo}
-//                 alt="Animite Logo"
-//                 className="h-72 animite-glow"
-//             />
-//         </div>
-
-//     )
-// }
-
 const CyberpunkMergedAnimiteSection: React.FC<CyberpunkMergedAnimiteSectionProps> = ({ className }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 

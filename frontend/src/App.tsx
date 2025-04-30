@@ -23,10 +23,10 @@ const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string
 const routes: IRoute[] = [
   { path: '/profile', element: <ProfilePage />, isPrivate: true, redirectTo: '/auth' },
   { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, 
-  {path: '/anime' , element:<Anime/> , isPrivate:true , redirectTo:'/auth'},
-  {path: '/community' , element:<Community/> , isPrivate:true , redirectTo:'/auth'},
+  {path: '/anime' , element:<Anime/> , isPrivate:false , redirectTo:'/auth'},
+  {path: '/community' , element:<Community/> , isPrivate:false , redirectTo:'/auth'},
   { path: '/about-us', element: <AboutUs />, isPrivate: false, redirectTo: '/' },
-  {path: '/news' , element:<NewsComponent/> , isPrivate:true , redirectTo:'/auth'},
+  {path: '/news' , element:<NewsComponent/> , isPrivate:false , redirectTo:'/auth'},
   { path: '/auth', element: <Auth />, isPrivate: false, redirectTo: '/' }
 ];
 
