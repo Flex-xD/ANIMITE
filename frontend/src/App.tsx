@@ -25,7 +25,7 @@ const routes: IRoute[] = [
   { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, 
   {path: '/anime' , element:<Anime/> , isPrivate:false , redirectTo:'/auth'},
   {path: '/community' , element:<Community/> , isPrivate:false , redirectTo:'/auth'},
-  { path: '/about-us', element: <AboutUs />, isPrivate: false, redirectTo: '/' },
+  { path: '/about us', element: <AboutUs />, isPrivate: false, redirectTo: '/' },
   {path: '/news' , element:<NewsComponent/> , isPrivate:false , redirectTo:'/auth'},
   { path: '/auth', element: <Auth />, isPrivate: false, redirectTo: '/' }
 ];
