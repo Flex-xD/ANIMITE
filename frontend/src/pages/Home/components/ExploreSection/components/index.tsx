@@ -1,10 +1,7 @@
 import { motion, Variants } from 'framer-motion';
 import { useRef, useEffect } from 'react';
-import { ProfileAvatar } from "../../../../../Built Components";
-
-interface CyberpunkMergedAnimiteSectionProps {
-    className?: string;
-}
+import { AuthButton, ProfileAvatar } from "../../../../../Built Components";
+import { CyberpunkMergedAnimiteSectionProps } from '../../../../../constants/types';
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -91,6 +88,8 @@ const CyberpunkMergedAnimiteSection: React.FC<CyberpunkMergedAnimiteSectionProps
         };
     }, []);
 
+    const mergedSectionButtons = ["JOIN NOW" , "EXPLORE FEATURES"];
+
     return (
         <section className={`relative overflow-hidden ${className}`}>
             {/* Animated cyberpunk background */}
@@ -158,12 +157,15 @@ const CyberpunkMergedAnimiteSection: React.FC<CyberpunkMergedAnimiteSectionProps
                                 className="flex flex-wrap gap-4 justify-center lg:justify-start"
                                 variants={itemVariants}
                             >
-                                <button className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-lg font-medium text-white shadow-lg hover:shadow-cyan-400/30 transition-all hover:scale-[1.02]">
-                                    Join Now
-                                </button>
-                                <button className="px-6 py-3 bg-transparent border border-cyan-400/40 text-cyan-400 rounded-lg font-medium shadow-lg hover:shadow-cyan-400/20 transition-all hover:scale-[1.02]">
-                                    Explore Features
-                                </button>
+                            
+                                {
+                                    mergedSectionButtons.map((button , buttonIndex) => (
+                                        (
+                                            <AuthButton buttonName={`${button}`} key={buttonIndex}/>
+                                        )
+                                    ))
+                                }
+                
                             </motion.div>
                         </div>
                     </div>

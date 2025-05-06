@@ -55,3 +55,7 @@ export interface IRoute {
 export interface IProfileAvatar {
     className?:string
 }
+
+export interface CyberpunkMergedAnimiteSectionProps {
+    className?: string;
+}

@@ -110,7 +110,7 @@ const FeatureCard = ({
 }) => {
     return (
         <motion.div
-            className="relative bg-[#380955] backdrop-blur-md rounded-xl p-6 border border-white/40 hover:border-cyan-400/50 transition-all duration-300 overflow-hidden group"
+            className="relative bg-[#240e58] backdrop-blur-md rounded-xl p-6 border border-white/40 hover:border-cyan-400/50 transition-all duration-300 overflow-hidden group"
             whileHover={{ y: -5 }}
         >
             <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10`} />
