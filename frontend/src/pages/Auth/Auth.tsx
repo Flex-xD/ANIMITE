@@ -87,10 +87,8 @@ const Auth = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className={`relative w-[420px] ${colors.bgDark}/95 backdrop-blur-xl ${colors.borderNeon} rounded-xl p-8 shadow-2xl ${colors.glowPurple} transform hover:scale-[1.02] transition-all duration-500`}
             >
-                {/* Glowing Background Effect */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#6b00ff]/20 to-[#ff00cc]/20 opacity-40 blur-3xl animate-pulse" />
 
-                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -105,7 +103,6 @@ const Auth = () => {
                     </p>
                 </motion.div>
 
-                {/* Tabs */}
                 <Tabs defaultValue="login" className="relative z-10">
                     <TabsList className="grid grid-cols-2 gap-4 mb-8 bg-transparent">
                         <TabsTrigger
@@ -122,7 +119,6 @@ const Auth = () => {
                         </TabsTrigger>
                     </TabsList>
 
-                    {/* Login Tab */}
                     <TabsContent value="login" className="space-y-4">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -166,7 +162,6 @@ const Auth = () => {
                         </motion.div>
                     </TabsContent>
 
-                    {/* Sign Up Tab */}
                     <TabsContent value="signup" className="space-y-4">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -225,7 +220,6 @@ const Auth = () => {
                     </TabsContent>
                 </Tabs>
 
-                {/* Footer Text */}
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -235,8 +229,6 @@ const Auth = () => {
                     Share, connect, and conquer the anime multiverse
                 </motion.p>
             </motion.div>
-
-            {/* Tailwind Animation Styles */}
             <style>{`
         .neon-text {
         text-shadow: 0 0 5px rgba(107, 0, 255, 0.8), 0 0 10px rgba(255, 0, 204, 0.6);
