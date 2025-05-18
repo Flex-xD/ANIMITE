@@ -19,4 +19,3 @@ export type AnimeNews = {
     excerpt: string;
     thumbnail?: string;
 };
-

@@ -21,6 +21,7 @@
     "jikanjs": "^0.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.0",
+    "rss-parser": "^3.13.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
