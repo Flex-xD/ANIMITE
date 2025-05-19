@@ -59,3 +59,43 @@ export interface IProfileAvatar {
 export interface CyberpunkMergedAnimiteSectionProps {
     className?: string;
 }
+
+export interface AnimeData {
+    id: number;
+    title: {
+        english?: string;
+        romaji?: string;
+        native?: string;
+    };
+    coverImage: {
+        large: string;
+    };
+    averageScore?: number;
+    startDate?: {
+        year?: number;
+        month?: number;
+        day?: number;
+    };
+    nextAiringEpisode?: {
+        airingAt: number;
+        episode: number;
+    };
+    episodes?: number;
+    status?: string;
+    genres?: string[];
+    description?: string;
+    endDate?: {
+        year?: number;
+        month?: number;
+        day?: number;
+    };
+}
+
+export interface AnimeNews {
+    mal_id: number;
+    url: string;
+    date: string;
+    title: string;
+    content: string;
+    excerpt: string;
+}

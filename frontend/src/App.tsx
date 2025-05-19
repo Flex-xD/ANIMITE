@@ -7,7 +7,7 @@ import ProfilePage from './pages/Profile/Profile';
 import Home from './pages/Home/Home';
 import NewsComponent from './pages/News';
 import { IRoute } from './constants/types';
-import Anime from './pages/Anime';
+import {Anime} from './pages/Anime';
 import Community from './pages/Community';
 import AboutUs from './pages/About us';
 

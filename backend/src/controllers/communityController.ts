@@ -5,7 +5,7 @@ import Community, { ICommunity } from "../models/Community.js";
 import mongoose, { mongo, ObjectId } from "mongoose";
 import { string } from "zod";
 import { error, timeStamp } from "console";
-import { ICommunityName } from "../types/types.js";
+import { ICommunityName } from "../routes/types/types.js";
 import { handleError } from "../middlewares/handleError.js";
 
 
@@ -218,8 +218,8 @@ export const leaveCommunityController = async (req: IAuthRequest, res: Response)
 
         const user = await User.findById(req.userId) as IUser;
         if (!user) {
-            return res.status(401).json({ 
-                msg: "User not found" 
+            return res.status(401).json({
+                msg: "User not found"
             });
         }
 
@@ -236,7 +236,7 @@ export const leaveCommunityController = async (req: IAuthRequest, res: Response)
             session = await Community.startSession();
             session.startTransaction();
 
-            const community = await Community.findOne({ 
+            const community = await Community.findOne({
                 name: { $regex: new RegExp(communityName.trim(), "i") }
             });
 
@@ -258,16 +258,16 @@ export const leaveCommunityController = async (req: IAuthRequest, res: Response)
                 });
             }
 
-            community.members = community.members.filter(member => 
+            community.members = community.members.filter(member =>
                 member.toString() !== userObjId.toString()
             );
-            
+
             if (user.role === "admin") {
-                user.communitiesCreated = (user.communitiesCreated || []).filter(communityId => 
+                user.communitiesCreated = (user.communitiesCreated || []).filter(communityId =>
                     communityId.toString() !== community._id.toString()
                 );
             }
-            user.communitiesJoined = (user.communitiesJoined || []).filter(communityId => 
+            user.communitiesJoined = (user.communitiesJoined || []).filter(communityId =>
                 communityId.toString() !== community._id.toString()
             );
 

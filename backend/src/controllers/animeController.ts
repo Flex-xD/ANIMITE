@@ -9,11 +9,17 @@ import { ApiError } from "../middlewares/handleError.js";
 const parser = new Parser();
 
 const AnimeIdSchema = z.object({
-  id: z.string().transform((val) => {
-    const parsed = parseInt(val);
-    if (isNaN(parsed)) throw new Error("Invalid anime ID");
-    return parsed;
-  }),
+  id: z
+    .string()
+    .nonempty("Anime ID is required")
+    .transform((val) => {
+      const parsed = parseInt(val, 10);
+      if (isNaN(parsed)) throw new Error("Invalid anime ID: must be a valid number");
+      return parsed;
+    })
+    .refine((val) => Number.isInteger(val) && val > 0, {
+      message: "Anime ID must be a positive integer",
+    }),
 });
 
 interface ApiResponse<T> {
@@ -128,6 +134,7 @@ export const getCurrentlyAiring = asyncHandler(async (req: Request, res: Respons
 export const getAnimeDetails = asyncHandler(async (req: Request, res: Response) => {
   const { id } = AnimeIdSchema.parse(req.params);
 
+
   const query = `
     query ($id: Int) {
       Media(id: $id, type: ANIME) {
@@ -161,7 +168,7 @@ export const getLatestAnimeNews = asyncHandler(async (req: Request, res: Respons
     .filter(
       (item): item is Required<Pick<Parser.Item, "title" | "link" | "pubDate" | "contentSnippet">> =>
         !!item.title && !!item.link && !!item.pubDate && !!item.contentSnippet &&
-        new Date(item.pubDate) >= new Date(Date.now() - 1000 * 60 * 60 * 24 * 21),
+        new Date(item.pubDate) >= new Date(Date.now() - 1000 * 60 * 60 * 24 * 60),
     )
     .map((item, idx) => ({
       mal_id: idx, 

@@ -1,10 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { GraphQLResponse, GraphQLVariables } from "../types/graphQlTypes.js";
+import { GraphQLResponse, GraphQLVariables } from "../routes/types/graphQlTypes.js";
 import { ApiError } from "../middlewares/handleError.js";
 
 const ANILIST_API = "https://graphql.anilist.co";
 
-export const fetchFromAnilist = async <T> (query: string, variables: GraphQLVariables = {}): Promise<GraphQLResponse<T>> => {
+export const fetchFromAnilist = async <T>(query: string, variables: GraphQLVariables = {}): Promise<GraphQLResponse<T>> => {
     try {
         if (!query || typeof query !== "string" || query.trim() === "") {
             throw new ApiError(400, "Invalid or empty GraphQL query");
