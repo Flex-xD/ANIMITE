@@ -171,14 +171,14 @@ export const getLatestAnimeNews = asyncHandler(async (req: Request, res: Respons
         new Date(item.pubDate) >= new Date(Date.now() - 1000 * 60 * 60 * 24 * 60),
     )
     .map((item, idx) => ({
-      mal_id: idx, 
+      mal_id: idx,
       url: item.link,
       date: item.pubDate,
-      author_username: "Unknown", 
-      author_url: "", 
+      author_username: "Unknown",
+      author_url: "",
       title: item.title,
       content: item.contentSnippet,
-      excerpt: item.contentSnippet, 
+      excerpt: item.contentSnippet,
     }));
 
   if (!recentNews.length) {

@@ -9,9 +9,9 @@ export interface IprivateRoutes {
 export interface IAuthButton {
     className?: string,
     children?: React.ReactNode,
-    buttonName: string , 
-    navigate?:string ,
-    onClick?:() => void
+    buttonName: string,
+    navigate?: string,
+    onClick?: () => void
 }
 
 export interface IProfileButton {
@@ -49,11 +49,11 @@ export interface IRoute {
     element: JSX.Element;
     isPrivate?: boolean;
     redirectTo?: string;
-    allowAuthenticated?: boolean; 
+    allowAuthenticated?: boolean;
 }
 
 export interface IProfileAvatar {
-    className?:string
+    className?: string
 }
 
 export interface CyberpunkMergedAnimiteSectionProps {
@@ -99,3 +99,68 @@ export interface AnimeNews {
     content: string;
     excerpt: string;
 }
+
+
+// ? COMMUNITY PAGE PROPS
+
+export type Community = {
+    id: string;
+    name: string;
+    members: number;
+    icon: string;
+};
+
+export type User = {
+    id: string;
+    username: string;
+    avatar: string;
+};
+
+export type FeedItemType = 'blog' | 'fanart' | 'list' | 'poll' | 'review';
+
+export type FeedItemBase = {
+    id: string;
+    type: FeedItemType;
+    user: User;
+    content: string;
+    likes: number;
+    timestamp: string;
+};
+
+export type BlogPost = FeedItemBase & {
+    type: 'blog';
+};
+
+export type FanArtPost = FeedItemBase & {
+    type: 'fanart';
+    additionalData: {
+        imageUrl: string;
+    };
+};
+
+export type ListPost = FeedItemBase & {
+    type: 'list';
+    additionalData: {
+        items: string[];
+    };
+};
+
+export type PollPost = FeedItemBase & {
+    type: 'poll';
+    additionalData: {
+        options: {
+            text: string;
+            votes: number;
+        }[];
+    };
+};
+
+export type ReviewPost = FeedItemBase & {
+    type: 'review';
+    content:string
+    additionalData: {
+        rating: number;
+    };
+};
+
+export type FeedItem = BlogPost | FanArtPost | ListPost | PollPost | ReviewPost;
