@@ -11,8 +11,6 @@ import { AxiosError } from "axios";
 import { motion } from "framer-motion";
 import { colors } from "../../constants/colors";
 
-
-
 const Auth = () => {
     const navigate = useNavigate();
     const { setUserInfo , setIsAuthenticated } = useAppStore();

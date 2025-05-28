@@ -1,4 +1,3 @@
-'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '../../../../components/ui/input';
@@ -13,6 +12,9 @@ type CommunitySidebarProps = {
 
 const mockCommunities: Community[] = [
     { id: '1', name: 'Cyberpunk Edgerunners', members: 12500, icon: 'CE' },
+    { id: '2', name: 'HeheHAHA', members: 2330, icon: 'SW' },
+    { id: '3', name: 'Edgerunners', members: 340, icon: 'HH' },
+    { id: '4', name: 'NAruto and sasuke lovers', members: 500, icon: 'GF' },
 ];
 
 const CommunitySidebar = ({ isOpen, onClose }: CommunitySidebarProps) => {

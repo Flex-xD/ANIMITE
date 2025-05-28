@@ -21,16 +21,14 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-y: scroll; /* Allow scrolling */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer */
+    overflow-y: scroll; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
-/* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
-html::-webkit-scrollbar {
-    display: none;
 
-    
+html::-webkit-scrollbar {
+    display: none;    
 }
 
 

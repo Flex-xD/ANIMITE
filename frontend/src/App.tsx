@@ -7,9 +7,10 @@ import ProfilePage from './pages/Profile/Profile';
 import Home from './pages/Home/Home';
 import NewsComponent from './pages/News';
 import { IRoute } from './constants/types';
-import {Anime} from './pages/Anime';
+import { Anime } from './pages/Anime';
 import Community from './pages/Community';
 import AboutUs from './pages/About us';
+import { AnimeFeedPage } from './pages/FEED';
 
 const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string, allowAuthenticated: boolean = false) => {
   const { isAuthenticated } = useAppStore();
@@ -22,11 +23,12 @@ const withAuth = (Component: JSX.Element, isPrivate: boolean, redirectTo: string
 
 const routes: IRoute[] = [
   { path: '/profile', element: <ProfilePage />, isPrivate: true, redirectTo: '/auth' },
-  { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true }, 
-  {path: '/anime' , element:<Anime/> , isPrivate:false , redirectTo:'/auth'},
-  {path: '/community' , element:<Community/> , isPrivate:false , redirectTo:'/auth'},
+  { path: '/', element: <Home />, isPrivate: false, allowAuthenticated: true },
+  { path: '/anime', element: <Anime />, isPrivate: false, redirectTo: '/auth' },
+  { path: '/community', element: <Community />, isPrivate: false, redirectTo: '/auth' },
+  { path: '/feed', element: <AnimeFeedPage />, isPrivate: false, redirectTo: '/auth' },
   { path: '/about us', element: <AboutUs />, isPrivate: false, redirectTo: '/' },
-  {path: '/news' , element:<NewsComponent/> , isPrivate:false , redirectTo:'/auth'},
+  { path: '/news', element: <NewsComponent />, isPrivate: false, redirectTo: '/auth' },
   { path: '/auth', element: <Auth />, isPrivate: false, redirectTo: '/' }
 ];
 

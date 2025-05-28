@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerControllerType } from "../routes/types/types.js";
+import { registerControllerType } from "../types/types.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
