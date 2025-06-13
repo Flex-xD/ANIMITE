@@ -33,7 +33,7 @@ export const useAnimeData = () => {
             }
 
             try {
-                // Fetch upcoming anime
+                // * Fetch upcoming anime
                 const { data: upcomingData } = await apiClient.post(API_ROUTES.UPCOMING);
                 setUpcoming(upcomingData.data || []);
             } catch (err) {
@@ -43,7 +43,7 @@ export const useAnimeData = () => {
             }
 
             try {
-                // Fetch currently airing anime
+                // * Fetch currently airing anime
                 const { data: airingData } = await apiClient.post(API_ROUTES.CURRENTLY_AIRING);
                 setCurrentlyAiring(airingData.data || []);
             } catch (err) {
@@ -53,7 +53,7 @@ export const useAnimeData = () => {
             }
 
             try {
-                // Fetch news
+                // * Fetch news
                 const { data: newsData } = await apiClient.post(API_ROUTES.LATEST_NEWS);
                 setNews(newsData.data || []);
             } catch (err) {

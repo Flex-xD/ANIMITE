@@ -1,3 +1,4 @@
-THINGS I HAVE TO DO NEXT :
-1. Make Profile-page compatible with showing the communitites joined , user post data etc.
-2. how can I take the data from the backend for the feed I am creating 
+
+THING I HAVE TO DO : (13|6|25) 
+1. Make profile page compatible with user's all posts , communities , a modal for the user profile when other user's will click on the profile in the feed section and also make it all compatible with the backend 
+2. Modify the backend for the feed and make all the data from the frontend save at backend database and make data from the backend appear on the frontend 
