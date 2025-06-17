@@ -1,4 +1,5 @@
 export interface User {
+    [x: string]: string;
     username: string;
     avatarUrl: string;
 }

@@ -2,3 +2,17 @@
 THING I HAVE TO DO : (13|6|25) 
 1. Make profile page compatible with user's all posts , communities , a modal for the user profile when other user's will click on the profile in the feed section and also make it all compatible with the backend 
 2. Modify the backend for the feed and make all the data from the frontend save at backend database and make data from the backend appear on the frontend 
+
+
+
+CURRENT-TODO's : 
+
+GET /posts - Fetch posts with params (limit, offset, random)
+
+PATCH /posts/:id/like - Toggle like
+
+POST /posts/:id/vote - Submit vote
+
+POST /posts - Create new post
+
+DELETE /posts/:id - Delete post
